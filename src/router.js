@@ -9,7 +9,8 @@ import VueRouter from "vue-router"
 const vueRouterObj = new VueRouter ( {
     routes : [
 
-    ]
+    ],
+    linkActiveClass : 'mui-active'
 } )
 
 export default  vueRouterObj
