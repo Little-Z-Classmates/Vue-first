@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>MemberContainer</h3>
+        <h3>SearchContainer</h3>
     </div>
 </template>
 

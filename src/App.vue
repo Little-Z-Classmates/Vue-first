@@ -2,8 +2,11 @@
     <div class="app-container">
         <!--  头部-->
         <mt-header fixed title="Vue项目"></mt-header>
-        <h1>123</h1>
-        <!--底部-->
+        <!-- 内容 -->
+        <transition name="content">
+            <router-view></router-view>
+        </transition>
+        <!-- 底部 -->
         <nav class="mui-bar mui-bar-tab">
             <router-link class="mui-tab-item" to="home">
                 <span class="mui-icon mui-icon-home"></span>
@@ -26,11 +29,7 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {}
-        }, methods : {}
-    }
+
 </script>
 
 <style lang="less" scoped>
@@ -38,7 +37,25 @@
         padding: 0;
         margin: 0;
     }
+    li{
+        list-style: none;
+    }
     .app-container {
         padding-top: 40px;
+        overflow-x: hidden;
     }
+    .content-enter{
+        opacity: 0;
+        transform : translateX(100%);
+    }
+    .content-leave-to{
+        opacity: 0;
+        transform:translateX(-100%);
+        position: absolute;
+    }
+    .content-enter-active,
+    .content-leave-active{
+        transition: all 1s ease;
+    }
+
 </style>

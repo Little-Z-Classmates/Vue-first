@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack",
-    "dev2": "webpack-dev-server --open --port 3000 --contentBase src "
+    "dev2": "webpack-dev-server --open --port 3000 --contentBase src  "
   },
   "keywords": [],
   "author": "",
@@ -32,6 +32,7 @@
     "url-loader": "^1.1.2",
     "vue": "^2.6.7",
     "vue-loader": "^15.6.4",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.5",
