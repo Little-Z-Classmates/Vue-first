@@ -22,6 +22,15 @@
 ```text
 解决方法 :.v-leave-to 离开时候加一个 position : absolute
 ```
+### 注意问题 : 全局的路由进行配置
+```text
+vue-resource 之后配置
+Vue.http.options.root = "根路径"
+```
+### 注意问题 : comment.vue 的数据拼接
+```text
+!!!  this.datalist = this.datalist.concat(results.body.message)
+```
 
 
 
