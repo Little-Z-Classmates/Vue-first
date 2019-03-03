@@ -2,8 +2,8 @@
     <div class="cmt-contaniner">
         <h3>评论区域</h3>
         <hr>
-        <textarea maxlength="180" placeholder="最多吐槽180字.."></textarea>
-        <mt-button type="primary" size="large">发表评论</mt-button>
+        <textarea maxlength="180" placeholder="最多吐槽180字.." v-model="textareaMsg"></textarea>
+        <mt-button type="primary" size="large" @click="uploadComment">发表评论</mt-button>
         <div class="cmt-list">
             <div class="cmt-item" v-for="(item ,index) in datalist" :key="index">
                 <div class="cmt-title">
@@ -24,7 +24,8 @@
        data(){
            return {
                datalist :[],
-               pageIndex : 1
+               pageIndex : 1,
+               textareaMsg: ''
            }
        },
         created(){
@@ -45,6 +46,26 @@
             getMore(){
                 this.pageIndex = this.pageIndex + 1
                 this.getComments()
+            },
+            uploadComment(){
+                 if ( this.textareaMsg.trim().length ===  0 ){
+                     return Toast ( '填写评论为空,请重新填写!!')
+                 }
+                 this.$http.post('api/postcomment/'+ this.artid ,{ content : this.textareaMsg })
+                 .then( results => {
+                     if( results.body.status === 0 ){
+                        var cmtObj = {
+                            username : "匿名用户",
+                            add_time : Date.now(),
+                            content : this.textareaMsg
+                        }
+                         this.datalist.unshift( cmtObj )
+                         this.textareaMsg = ''
+                         Toast( results.body.message )
+                     }else{
+                         Toast( results.body.message )
+                     }
+                 })
             }
         },
         props:['artid']

@@ -1,9 +1,7 @@
 <template>
     <div>
         <!-- 内容中间 -->
-        <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="item in lunbotuList" :key="item.img"><img :src="item.img" alt=""></mt-swipe-item>
-        </mt-swipe>
+        <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
         <!-- nav 区域 -->
         <div class="mui-content" style="transform: translateY(-15px)">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -14,14 +12,16 @@
                     </router-link>
                 </li>
                 <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-4">
-                    <router-link to="">
+                    <router-link to="/home/photolist">
                     <img src="../../lib/img/六宫格小图标/menu2.png" alt="">
                     <div class="mui-media-body">图片分享</div>
                     </router-link>
                 </li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-4"><router-link to="#">
+                <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-4">
+                    <router-link to="/home/goodslist">
                     <img src="../../lib/img/六宫格小图标/menu3.png" alt="">
-                    <div class="mui-media-body">商品购买</div></router-link>
+                    <div class="mui-media-body">商品购买</div>
+                    </router-link>
                 </li>
                 <li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-4"><router-link to="#">
                     <img src="../../lib/img/六宫格小图标/menu4.png" alt="">
@@ -42,10 +42,12 @@
 
 <script>
     import  { Toast } from "mint-ui"
+    import  swiper from  "../subcomponments/swiper.vue"
+
     export default {
         data () {
             return {
-                lunbotuList : null
+                lunbotuList : [ ]
             }
         },
         created () {
@@ -62,6 +64,9 @@
                     }
                 } )
             }
+        },
+        components:{
+            swiper
         }
     }
 </script>
@@ -74,24 +79,7 @@
     li{
         list-style: none;
     }
-        .mint-swipe {
-            height: 200px;
-            .mint-swipe-item {
-                &:nth-child(1) {
-                    background-color: lavenderblush;
-                }
-                &:nth-child(2) {
-                    background-color: blue;
-                }
-                &:nth-child(3) {
-                    background-color: yellow;
-                }
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-        }
+
         .mui-grid-view.mui-grid-9{
             border: 0;
             background-color: #fff;
