@@ -21,7 +21,6 @@
 </template>
 
 <script>
-    import  { Toast } from "mint-ui"
     export default {
         data(){
             return {
@@ -38,8 +37,6 @@
                 .then( results => {
                     if ( results.body.status === 0 ){
                         this.goodsListInfo = this.goodsListInfo.concat(  results.body.message )
-                    }else{
-                        Toast('商品列表数据.OK')
                     }
                 })
             },

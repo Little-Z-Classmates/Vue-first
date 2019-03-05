@@ -92,5 +92,56 @@ Vue.http.options.emulateJSON = true;
 我们可以给 让 父组件传 一个 属性给 子组件 ,属性值是布尔值, :isfull="true/false"
 子组件拿到后, 用这个布尔值 ,传入 操作绑定的 class 属性的 full 样式, 这个是样式就是 宽度是否为100%
 ```
+### 注意 : 可以改进入ip地址
+```text
+  "scripts": {
+    "dev2": "webpack-dev-server --open --port 3002 --contentBase src --host 172.16.18.1 "
+  }, 可以改进入ip地址, --host
+```
+### 注意 : 把mui numbox,也就是(数字输入框)封装成组件
+```text
+MUI 中明确表示 : mui在mui.init()中会自动初始化基本控件,但是 动态添加的Numbox组件需要手动初始化
+1. import 导入 MUI 的 JS
+2. 在export default 中 mounted 钩子函数写入 : mui(Selector).numbox(),
+但是我在GoodsInfo 中导入了 全部的 Mui-ui了
+```
+### 注意 : 组件中可以操作界面上的任意, 但是Vue不推荐, 购物车图标位置可以通过DOM拿到
+```text
+!!!!! 在组件中 操作DOM , 可以拿到任何你想拿到的 DOM ,但 Vue不推荐操作DOM, 但是不涉及到 Vue数据绑定之类的 就可以
+```
+### 开发问题 : 
+##### 1.在 GoodsInfo 上一层中打开GoodsInfo,库存数量无法显示,需要刷新一下
+![](F:\06-Front-end-Job-class\myLearn\vue\vue_code\Snipa.png)
+
+```text
+原因 :  注册的时候 选择器没加 ‘.'
+```
+### 开发问题 : 小球点击问题,多次点击就乱跳动
+```text
+我把点击事件,加到 afterEnter事件里面就不行,因为会秒执行,求解?
+需要加到 leaveEnter事件里面 
+原因： afterEnter 执行时机是 enter执行之后执行，enter已经执行之后，但是此时 动画还没完成， 但是enter 事件已经完成，所以再afterEnter中更换状态不行，需要再动画结束的时候更换状态，——> leaveEnter 中 
+```
+### 开发问题 : 想数据异步传入 子组件 GoodsInfo 的 库存数量
+```text
+用 watch 监听 
+```
+### 开发细节 : goodsinfo 的 数据 传回父组件 GoodsInfo 
+```text
+思路 : 每次点击 加入购物车, 应该会拿到一个 实时的 子组件数字框 的对应数值
+1. 可以定义一个data数据 num, 初始值为1, 只要 数字框的不进行 '+' '-' 操作,一直为 1,加入购物车之间中操作的应该是 data的num数据
+2. 只要数字框进行加减了, 父组件定义一个方法 加一个参数, 传回子组件, 子组件进行调用, 传回变更的值
+2.1 子组件拿到了父组件的方法, 执行时机为 值改变的时候, 注册的是input元素的 onchange 事件,
+2.2 得到了执行时机, 可以通过给 这个input元素 加一个 ref属性,拿到DOM, 得到input 元素的 value 属性的值,进行操作,完成!!
+```
+### 开发细节 : store 数据存储到 本地存储中 localStorage
+```text
+1. 存储时机 : 在每次添加到 shopCar 之后, 就把 添加之后的shopCar 传入到 localStrorage中
+2. 获取时机 : 因为main.js 是执行每次页面打开都会执行的 脚本文件, 放在main.js 中最适合不过
+```
+
+
+
+
 
 

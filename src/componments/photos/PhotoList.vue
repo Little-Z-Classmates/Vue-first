@@ -31,7 +31,7 @@
 
 <script>
     import { Toast } from "mint-ui"
-    import mui from "../../lib/mui-master/dist/js/mui"
+    import mui from "../../lib/mui/js/mui.js"
     // mui('body').on( 'tap' , 'a' , function(){
     //     document.location.href=this.href;
     // } )

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack",
-    "dev2": "webpack-dev-server --open --port 3002 --contentBase src --host 172.16.18.1 "
+    "dev2": "webpack-dev-server --open --port 3002 --contentBase src "
   },
   "keywords": [],
   "author": "",
@@ -40,6 +40,7 @@
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.6.7",
+    "vuex": "^3.1.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
@@ -48,6 +49,7 @@
     "html-webpack-plugin": "^3.2.0",
     "mint-ui": "^2.2.13",
     "moment": "^2.24.0",
-    "vue-preview": "^1.1.3"
+    "vue-preview": "^1.1.3",
+    "vuex": "^3.1.0"
   }
 }
