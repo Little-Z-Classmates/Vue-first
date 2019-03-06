@@ -13,7 +13,7 @@ import Vuex from "vuex"
 Vue.use( Vuex )
 const store = new Vuex.Store({
     state:{
-        shopCar: shoppingCar  // { id : 商品ID , count : 商品数量 , price : 商品单价 , selected : false }
+        shopCar: shoppingCar  // [ { id : 商品ID , count : 商品数量 , price : 商品单价 , selected : false }, .... ]
     },
     mutations:{
         // 在shopCar中 添加对象 , 同一个id 只添加数量, 不同id 添加对象
@@ -31,7 +31,36 @@ const store = new Vuex.Store({
             }
             localStorage.setItem('shopCarInfo',JSON.stringify(state.shopCar))
         },
-
+       // 根据Id 和 count值 来修改 shopCar 中的 商品对应的 count
+        updateShopCarCount(state,shopCarCountObj){
+             state.shopCar.some(item =>{
+                 if ( item.id == shopCarCountObj.id ){
+                     item.count = parseInt(shopCarCountObj.count)
+                     return true
+                 }
+             })
+            localStorage.setItem('shopCarInfo',JSON.stringify(state.shopCar))
+        },
+       // 根据ID 删除 shopCar 的相应 数据
+        remove( state , id ){
+            state.shopCar.some( ( item,key ) =>{
+                if ( item.id  == id ){
+                     state.shopCar.splice( key, 1 )
+                    return true
+                }
+            })
+            localStorage.setItem('shopCarInfo',JSON.stringify(state.shopCar))
+        },
+       // 根据Id 修改 shopCar 中商品对应的 选中状态
+        updateShopCarSelected(state,shopCarSelectedObj){
+            state.shopCar.some( item =>{
+                if ( item.id == shopCarSelectedObj.id ){
+                     item.selected = shopCarSelectedObj.selected
+                     return true
+                }
+            })
+            localStorage.setItem('shopCarInfo',JSON.stringify(state.shopCar))
+        }
     },
     getters:{
         // 得到所有商品的总数
@@ -41,6 +70,38 @@ const store = new Vuex.Store({
                 num += parseInt(item.count)
             })
             return num
+        },
+        //  得到shopCar 中的数据,以 id: count 的当时 组织成一个对象
+        getIdAndCount(state){
+            var IdAndConut = {}
+            state.shopCar.forEach( item =>{
+                IdAndConut[item.id] = parseInt(item.count)
+            })
+            return IdAndConut
+        },
+        // 根据Id , 获取 id : selected 键值对
+        getIdAndSelected(state){
+            var IdAndSelectedObj = {}
+            state.shopCar.forEach( item => {
+                IdAndSelectedObj[item.id] = item.selected
+            })
+            return IdAndSelectedObj
+        },
+        // 得到总件数,和总价
+        getAllCountAndPrice(state){
+            var AllCount = 0;
+            var AllPrice = 0;
+            state.shopCar.forEach( item  =>{
+                if ( item.selected === true ){
+                     AllCount += item.count
+                     AllPrice += item.count * item.price
+                }
+            })
+             var AllCountAndPriceObj = {
+                 AllCount : AllCount,
+                 AllPrice : AllPrice
+             }
+            return AllCountAndPriceObj
         }
     }
 })

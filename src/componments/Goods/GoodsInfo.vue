@@ -97,12 +97,14 @@
                 if( this.key == 0 ){
                     this.key = 1
                     this.ballFlag = !this.ballFlag
-                    console.log ( this.selectedCount )
+                    var id = this.id
+                    var count =  this.selectedCount
+                    var price = this.goodsInfo.sell_price
                     //{ id : 商品ID , count : 商品数量 , price : 商品单价 , selected : false }
                     var goodsObj = {
-                        id : this.id ,
-                        count : this.selectedCount ,
-                        price : this.goodsInfo.sell_price,
+                        id    : parseInt(id)  ,
+                        count : parseInt(count),
+                        price : parseInt(price),
                         selected : true
                     }
                      this.$store.commit('addShopCar',goodsObj)
@@ -134,7 +136,6 @@
             },
             getGoodsNum( count ){
                 this.selectedCount = count
-                console.log ( count )
             }
         },
         components:{

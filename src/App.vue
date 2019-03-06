@@ -1,7 +1,11 @@
 <template>
     <div class="app-container">
         <!--  头部-->
-        <mt-header fixed title="Vue项目"></mt-header>
+        <mt-header fixed title="Vue项目">
+            <span slot="left" v-show="flag" @click="goBack">
+                <mt-button icon="back">返回</mt-button>
+            </span>
+        </mt-header>
         <!-- 内容 -->
         <transition name="content">
             <router-view></router-view>
@@ -29,7 +33,30 @@
 </template>
 
 <script>
-
+export default {
+    data(){
+        return {
+            flag : false
+        }
+    },
+    created(){
+        this.flag = this.$route.path ===  '/home'? false:true
+    },
+    methods:{
+        goBack(){
+            this.$router.go(-1)
+        }
+    },
+    watch:{
+        '$route.path' : function ( newVal ) {
+            if ( newVal === '/home'){
+                this.flag = false
+            }else{
+                this.flag = true
+            }
+        }
+    }
+}
 </script>
 
 <style lang="less" scoped>
@@ -41,6 +68,8 @@
         list-style: none;
     }
     .app-container {
+        position: relative;
+        height: 100vh;
         padding-top: 40px;
         padding-bottom: 50px;
         overflow-x: hidden;

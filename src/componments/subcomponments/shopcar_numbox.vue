@@ -1,8 +1,8 @@
 <template>
     <span >
-       <span class="mui-numbox" data-numbox-step='1' data-numbox-min='1' style="height: 25px" >
+       <span class="mui-numbox" data-numbox-step='1' data-numbox-min='0' style="height: 25px" >
        <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-       <input class="mui-numbox-input" type="number" />
+       <input class="mui-numbox-input" type="number" ref="numBox" @change="changeEx" readonly :value="this.countNum" />
        <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
        </span>
     </span>
@@ -12,13 +12,18 @@
     import mui from "../../lib/mui/js/mui.js"
     export default {
         methods:{
-            // 数量改变了
+            changeEx(){
+                var shopCarCountObj = {
+                    id : this.goodsId,
+                    count : this.$refs.numBox.value
+                }
+                this.$store.commit('updateShopCarCount', shopCarCountObj )
+            }
         },
         mounted(){
             mui('.mui-numbox').numbox()
         },
-        props:['maxGoods'],
-
+        props:['countNum','goodsId'],
     }
 </script>
 

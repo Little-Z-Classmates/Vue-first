@@ -139,7 +139,17 @@ MUI 中明确表示 : mui在mui.init()中会自动初始化基本控件,但是 �
 1. 存储时机 : 在每次添加到 shopCar 之后, 就把 添加之后的shopCar 传入到 localStrorage中
 2. 获取时机 : 因为main.js 是执行每次页面打开都会执行的 脚本文件, 放在main.js 中最适合不过
 ```
-
+### 开发细节 : ShopcarContainer 
+```text
+<mt-switch v-model="IdAndSelected[item.id]"></mt-switch>
+从 store 中得到 "id : 开关值" 键值对的对象,到 ShopcarContainer 中,
+思考怎么同步上去 : 因为已经存储到咱们的data 中的 IdAndSelected 数据中, 
+mt-switch 的v-model 数据绑定,从item中得到id,再取值,IdAndSelected[item.id],就得对应的数据
+```
+### 开发细节 : mt-switch 有值改变事件
+```text
+change 事件就可以对应的修改 store 里面的数据
+```
 
 
 
